@@ -26,6 +26,8 @@ class MasterViewController: UITableViewController {
                 objects.append(item)
             }
         }
+        
+        navigationItem.title = "Storm Photos"
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -43,9 +45,9 @@ class MasterViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
-                let object = objects[indexPath.row]
-                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
-                controller.detailItem = object
+                let navigationController = segue.destinationViewController as! UINavigationController
+                let controller = navigationController.topViewController as! DetailViewController
+                controller.detailItem = objects[indexPath.row]
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
